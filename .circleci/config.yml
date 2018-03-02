@@ -33,13 +33,13 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-
+            python3 -m venv demo-circi
+            . demo-circi/bin/activate
+            #pip install -r requirements.txt
+            pwd; ls -al
       - save_cache:
           paths:
-            - ./venv
+            - ./demo-circi
           key: v1-dependencies-{{ checksum "requirements.txt" }}
         
       # run tests!
@@ -50,7 +50,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
+            . demo-circi/bin/activate
             python manage.py test
 
       #- run:
