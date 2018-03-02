@@ -54,7 +54,8 @@ jobs:
             . fourier-smoke/bin/activate
             pwd
             ls -al
-            python manage.py test
+            which python
+            #python manage.py test
             mkdir test-reports
             pytest --junitxml=test-reports/junit.xml
       #- run:
