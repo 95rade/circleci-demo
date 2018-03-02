@@ -10,15 +10,15 @@ jobs:
       - setup_remote_docker
     docker:
       # specify the version you desire here
-      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers` or -node for JS tests
       - image: circleci/python:3.6.1-browsers
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/postgres:9.4
+      - image: circleci/postgres:9.4
 
-    working_directory: ~/my-workspace/circle-ci
+    working_directory: ~/my-workspace
 
     steps:
       - checkout
@@ -36,12 +36,12 @@ jobs:
             pwd; ls -al
             python3 -m venv demo-circi
             . demo-circi/bin/activate
-            #pip install -r requirements.txt
+            pip install -r requirements.txt
             pwd; ls -al
-      #- save_cache:
-      #    paths:
-      #      - ./demo-circi
-      #    key: v1-dependencies-{{ checksum "requirements.txt" }}
+      - save_cache:
+          paths:
+            - ./demo-circi
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
         
       # run tests!  Save this for later
       # this example uses Django's built-in test-runner
@@ -54,8 +54,9 @@ jobs:
             . demo-circi/bin/activate
             pwd
             ls -al
-            #python manage.py test
-            python -v
+            python manage.py test
+            mkdir test-reports
+            pytest --junitxml=test-reports/junit.xml
       #- run:
       #    name: run tests
       #    command: |
