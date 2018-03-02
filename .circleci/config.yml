@@ -55,9 +55,9 @@ jobs:
             pwd
             ls -al
             which python
-            #python manage.py test
+            # python manage.py test
             mkdir test-reports
-            #pytest --junitxml=test-reports/junit.xml
+            # pytest --junitxml=test-reports/junit.xml
       #- run:
       #    name: run tests
       #    command: |
