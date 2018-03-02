@@ -52,8 +52,10 @@ jobs:
           name: run tests
           command: |
             . demo-circi/bin/activate
-            python manage.py test
-
+            pwd
+            ls -al
+            #python manage.py test
+            python -v
       #- run:
       #    name: run tests
       #    command: |
