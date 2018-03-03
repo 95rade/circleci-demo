@@ -36,12 +36,12 @@ jobs:
             pwd; ls -al
             python3 -m venv fourier-smoke
             . fourier-smoke/bin/activate
-            pip install -r requirements.txt
+            pip install -r requirements/dev.txt
             pwd; ls -al
       - save_cache:
           paths:
             - ./fourier-smoke
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
+          key: v1-dependencies-{{ checksum "requirements/dev.txt" }}
         
       # run tests!  Save this for later
       # this example uses Django's built-in test-runner
@@ -57,7 +57,7 @@ jobs:
             which python
             whoami
             uname -a
-            # python manage.py test   -> django style test runner
+            python manage.py test   -> django style test runner
             mkdir test-reports
             # pytest --junitxml=test-reports/junit.xml
       #- run:
